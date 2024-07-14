@@ -12,3 +12,4 @@ langchain
 pyPDF2
 faiss-cpu
 tiktoken
+pydub
