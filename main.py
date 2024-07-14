@@ -10,11 +10,11 @@ from app2 import main as report_evalution
 # Create left sidebar navigation with a list
 option = st.sidebar.radio(
     'Navigation',
-    ['User Inputs', 'Additional Questions']
+    ['User Inputs', 'Lab Report']
 )   
 
 # Render selected page based on user's choice
 if option == 'User Inputs':
     voice_chat()
-elif option == 'Additional Questions':
+elif option == 'Lab Report':
     report_evalution()
