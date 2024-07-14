@@ -1,12 +1,10 @@
 import streamlit as st
 import openai
 from openai import AzureOpenAI
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores.azuresearch import AzureSearch
+
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
-from langchain.chains import RetrievalQA
-from langchain.prompts import PromptTemplate
+
 import tempfile
 
 API_KEY=st.secrets["OPENAI_API_KEY"]
