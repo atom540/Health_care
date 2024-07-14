@@ -8,3 +8,7 @@ requests
 streamlit
 keyboard
 Pillow
+langchain
+pyPDF2
+faiss-cpu
+tiktoken

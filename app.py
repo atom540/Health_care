@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import speech_recognition as sr
-from openai import AzureOpenAI, OpenAI
+from openai import AzureOpenAI
 from pydub import AudioSegment
 import subprocess
 import librosa
@@ -17,9 +17,6 @@ import fitz
 import keyboard
 import threading
 import base64
-
-
-
 
 
 API_KEY=st.secrets["OPENAI_API_KEY"]
@@ -212,8 +209,7 @@ def save_summary(summary):
 
 
 
-# Streamlit app
-st.title("Mental Health Chatbot")
+st.markdown("<h1 style='text-align: center;'>Mental Health Chatbot</h1>", unsafe_allow_html=True)
 
 
 # Streamlit app
@@ -340,7 +336,8 @@ st.markdown("""
                 unsafe_allow_html=True)
 
 if st.session_state.session_start:
-        if st.button("Start Session"):
+        # if st.button("Start Session"):
+        if st.markdown("<div style='text-align: center;'><button style='background-color: #0e1117; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;' onclick='window.location.reload();'> 🎙️Ask question</button></div>", unsafe_allow_html=True):
             question = speech_recog()
             response = generate_response(question)
             speak(response)
