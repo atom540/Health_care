@@ -1,7 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 from openai import AzureOpenAI
-import time
+
 
 # Initialize Azure OpenAI client
 API_KEY = "394c57a3-013f-4ba5-a763-de1f0f3f7bd9"

@@ -3,19 +3,10 @@ import os
 import speech_recognition as sr
 from openai import AzureOpenAI
 from pydub import AudioSegment
-import subprocess
 import librosa
 import io
 import pyttsx3
-import requests
-import time
 from streamlit_mic_recorder import mic_recorder
-import asyncio
-import cv2
-import pytesseract
-import fitz
-import keyboard
-import threading
 import base64
 
 
