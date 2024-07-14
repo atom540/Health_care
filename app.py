@@ -208,181 +208,183 @@ def save_summary(summary):
         file.write(summary)
 
 
+def main():
 
-st.markdown("<h1 style='text-align: center;'>Mental Health Chatbot</h1>", unsafe_allow_html=True)
-
-
-# Streamlit app
-if 'record' not in st.session_state:
-    st.session_state.record = False
-
-if 'session' not in st.session_state:
-    st.session_state.session = False
-
-if 'session_end' not in st.session_state:
-    st.session_state.session_end = False
-
-if 'session_start' not in st.session_state:
-    st.session_state.session_start = True
+    st.markdown("<h1 style='text-align: center;'>Mental Health Chatbot</h1>", unsafe_allow_html=True)
 
 
-intro_message = "Remember to tap spacebar before you say any voice commands. To upload a file say UPLOAD, to start say START, to translate to a different language say TRANSLATE, to summarize say SUMMARISE, to ask questions say QUESTION, to quiz yourself say QUIZ, to change the playback speed say FAST, MEDIUM, or SLOW. "
-# speak(intro_message,engine)
+    # Streamlit app
+    if 'record' not in st.session_state:
+        st.session_state.record = False
 
-st.markdown("""
-    <style>
-        .stApp {
-            background-color: rgba(33,33,33,255);
-        }
-        .user-message, .bot-message {
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-            color:white
-        }
-        .user-message {
-            background-color: #0d0d0d;
-            text-align: left;
-        }
-        .bot-message {
-            background-color: #2f2f2f;
-            text-align: left;
-        }
-        .message-container {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-        .message-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-        .stButton {
-            color: white;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            cursor: pointer;
-        }
+    if 'session' not in st.session_state:
+        st.session_state.session = False
+
+    if 'session_end' not in st.session_state:
+        st.session_state.session_end = False
+
+    if 'session_start' not in st.session_state:
+        st.session_state.session_start = True
 
 
-                .stApp {
-                    background-color: rgba(33,33,33,255);
-                    border: 2px solid #555;
-                    border-radius: 10px;
-                    padding: 20px;
-                    width: 80vw;
-                    margin: 20px auto; /* Center align and add space around */   
-                    margin-top:4rem;
-                }
-                .stButton {
-                    color: white;
-                    border: none;
-                    border-radius: 4px;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                    cursor: pointer;
-                    margin-top: 10px; /* Increase vertical gap */
-                    margin-bottom: 10px; /* Increase vertical gap */
-                }
+    intro_message = "Remember to tap spacebar before you say any voice commands. To upload a file say UPLOAD, to start say START, to translate to a different language say TRANSLATE, to summarize say SUMMARISE, to ask questions say QUESTION, to quiz yourself say QUIZ, to change the playback speed say FAST, MEDIUM, or SLOW. "
+    # speak(intro_message,engine)
 
-                .navbar {
-                    background-color: #333;
-                    padding: 10px 0;
-                    text-align: center;
-                    margin-bottom: 20px;
-                    border-bottom: 2px solid #555;
-                }
-                .navbar-title {
-                    color: white;
-                    font-size: 24px;
-                    font-weight: bold;
-                }
-
-        .scrollable-conversation {
-            max-height: 400px;
-            overflow-y: auto;
-            padding-right: 20px; /* Add padding to keep scrollbar visible */
-        }
-
-    </style>
-""",
-            unsafe_allow_html=True)
-
-st.markdown("""
+    st.markdown("""
         <style>
-            .record-button {
-                background-color: #4CAF50; /* Green */
-                border: none;
+            .stApp {
+                background-color: rgba(33,33,33,255);
+            }
+            .user-message, .bot-message {
+                border-radius: 10px;
+                padding: 10px;
+                margin-bottom: 10px;
+                color:white
+            }
+            .user-message {
+                background-color: #0d0d0d;
+                text-align: left;
+            }
+            .bot-message {
+                background-color: #2f2f2f;
+                text-align: left;
+            }
+            .message-container {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 10px;
+            }
+            .message-icon {
+                width: 40px;
+                height: 40px;
+                margin-right: 10px;
+            }
+            .stButton {
                 color: white;
-                padding: 15px 32px;
-                text-align: center;
+                border: none;
+                border-radius: 4px;
                 text-decoration: none;
                 display: inline-block;
                 font-size: 16px;
-                margin: 4px 2px;
                 cursor: pointer;
-                border-radius: 10px;
             }
-            .record-button:hover {
-                background-color: #45a049;
+
+
+                    .stApp {
+                        background-color: rgba(33,33,33,255);
+                        border: 2px solid #555;
+                        border-radius: 10px;
+                        padding: 20px;
+                        width: 80vw;
+                        margin: 20px auto; /* Center align and add space around */   
+                        margin-top:4rem;
+                    }
+                    .stButton {
+                        color: white;
+                        border: none;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        cursor: pointer;
+                        margin-top: 10px; /* Increase vertical gap */
+                        margin-bottom: 10px; /* Increase vertical gap */
+                    }
+
+                    .navbar {
+                        background-color: #333;
+                        padding: 10px 0;
+                        text-align: center;
+                        margin-bottom: 20px;
+                        border-bottom: 2px solid #555;
+                    }
+                    .navbar-title {
+                        color: white;
+                        font-size: 24px;
+                        font-weight: bold;
+                    }
+
+            .scrollable-conversation {
+                max-height: 400px;
+                overflow-y: auto;
+                padding-right: 20px; /* Add padding to keep scrollbar visible */
             }
+
         </style>
     """,
                 unsafe_allow_html=True)
 
-if st.session_state.session_start:
-        # if st.button("Start Session"):
-        if st.markdown("<div style='text-align: center;'><button style='background-color: #0e1117; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;' onclick='window.location.reload();'> 🎙️Ask question</button></div>", unsafe_allow_html=True):
-            question = speech_recog()
-            response = generate_response(question)
-            speak(response)
-            st.write(response)
+    st.markdown("""
+            <style>
+                .record-button {
+                    background-color: #4CAF50; /* Green */
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border-radius: 10px;
+                }
+                .record-button:hover {
+                    background-color: #45a049;
+                }
+            </style>
+        """,
+                    unsafe_allow_html=True)
 
-        if st.session_state.conversation_history: 
+    if st.session_state.session_start:
+            if st.button("🎙️Ask question"):
+            # if st.markdown("<div style='text-align: center;'><button style='background-color: #0e1117; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;' onclick='window.location.reload();'> 🎙️Ask question</button></div>", unsafe_allow_html=True):
+                question = speech_recog()
+                response = generate_response(question)
+                speak(response)
+                st.write(response)
 
-            if st.button("End Conversation"):
-                st.session_state.session_end = True
-                st.session_state.session = False
-                st.session_state.session_start = False
-                st.experimental_rerun()  
-            
+            if st.session_state.conversation_history: 
 
-            st.subheader("Conversation History")
+                if st.button("End Conversation"):
+                    st.session_state.session_end = True
+                    st.session_state.session = False
+                    st.session_state.session_start = False
+                    st.experimental_rerun()  
+                
 
-            user_icon_b64 = get_image_as_base64("user-icon.png")
-            bot_icon_b64 = get_image_as_base64("bot-icon.png")
+                st.subheader("Conversation History")
 
-            st.markdown('<div class="scrollable-conversation">', unsafe_allow_html=True)
+                user_icon_b64 = get_image_as_base64("image/user-icon.png")
+                bot_icon_b64 = get_image_as_base64("image/bot-icon.png")
 
-            for message in st.session_state.conversation_history:
-                role = "User" if message["role"] == "user" else "Bot"
-                icon = user_icon_b64 if role == "User" else bot_icon_b64
-                message_class = "user-message" if role == "User" else "bot-message"
-                st.markdown(f"""
-                    <div class="message-container">
-                        <img src="data:image/png;base64,{icon}" class="message-icon">
-                        <div class="{message_class}">
-                            <strong>{role}:</strong> {message['content']}
+                st.markdown('<div class="scrollable-conversation">', unsafe_allow_html=True)
+
+                for message in st.session_state.conversation_history:
+                    role = "User" if message["role"] == "user" else "Bot"
+                    icon = user_icon_b64 if role == "User" else bot_icon_b64
+                    message_class = "user-message" if role == "User" else "bot-message"
+                    st.markdown(f"""
+                        <div class="message-container">
+                            <img src="data:image/png;base64,{icon}" class="message-icon">
+                            <div class="{message_class}">
+                                <strong>{role}:</strong> {message['content']}
+                            </div>
                         </div>
-                    </div>
-                """,
-                            unsafe_allow_html=True)
+                    """,
+                                unsafe_allow_html=True)
 
-            st.markdown('</div>', unsafe_allow_html=True) 
-
-
-if st.session_state.session_end:
-    summary = generate_summary(st.session_state.conversation_history)
-    st.write("Summary:")
-    st.write(summary)
-    save_summary(summary)
-    st.write("Conversation ended. Thank you!")        
-               
+                st.markdown('</div>', unsafe_allow_html=True) 
 
 
+    if st.session_state.session_end:
+        summary = generate_summary(st.session_state.conversation_history)
+        st.write("Summary:")
+        st.write(summary)
+        save_summary(summary)
+        st.write("Conversation ended. Thank you!")        
+                
+
+if __name__ == '__main__':
+    main()
 

@@ -53,48 +53,53 @@ def get_answer(context, query):
     answer = response.choices[0].message.content.strip()
     return answer
 
-# Title of the Streamlit app
-st.title("Medical Report Summarizer and Q&A")
+def main():
+    # Title of the Streamlit app
+    st.title("Medical Report Summarizer and Q&A")
 
-# File uploader for the medical report
-uploaded_file = st.file_uploader("Choose a medical report file", type=["txt", "pdf"])
+    # File uploader for the medical report
+    uploaded_file = st.file_uploader("Choose a medical report file", type=["txt", "pdf"])
 
-if uploaded_file is not None:
-    # Create a temporary file to store the uploaded PDF
-    temp_file = tempfile.NamedTemporaryFile(delete=False)
-    temp_file.write(uploaded_file.read())
-    
-    document_path = temp_file.name  # Use the temp file path
-    
-    # Load and split the PDF document
-    loader = PyPDFLoader(document_path)
-    documents = loader.load_and_split()
+    if uploaded_file is not None:
+        # Create a temporary file to store the uploaded PDF
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        temp_file.write(uploaded_file.read())
+        
+        document_path = temp_file.name  # Use the temp file path
+        
+        # Load and split the PDF document
+        loader = PyPDFLoader(document_path)
+        documents = loader.load_and_split()
 
-    # Split the text into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=1200, chunk_overlap=25)
-    docs = text_splitter.split_documents(documents)
-    combined_text = "\n".join([doc.page_content for doc in docs])
-    # st.write(combined_text)
-    # Summarize the report
-    summary = summarize_report(combined_text)
-    st.subheader("Summary")
-    st.write(summary)
-    
-    
-    
-    # User input for asking questions
-    question = st.text_input("Ask a question about the medical report:")
-    
-    # Create a clear button to reset the question input and remove the answer
-    if st.button("Clear"):
-        question = ""  # Reset the question input
-        st.text_input("Ask a question about the medical report:", value=question, key="question_input")
-    
-    if question:
-        # Get the answer to the question
-        answer = get_answer(combined_text, question)
-        st.subheader("Answer")
-        st.write(answer)
-    else:
-        st.write("Please enter a question to get an answer.")
+        # Split the text into chunks
+        text_splitter = CharacterTextSplitter(chunk_size=1200, chunk_overlap=25)
+        docs = text_splitter.split_documents(documents)
+        combined_text = "\n".join([doc.page_content for doc in docs])
+        # st.write(combined_text)
+        # Summarize the report
+        summary = summarize_report(combined_text)
+        st.subheader("Summary")
+        st.write(summary)
+        
+        
+        
+        # User input for asking questions
+        question = st.text_input("Ask a question about the medical report:")
+        
+        # Create a clear button to reset the question input and remove the answer
+        if st.button("Clear"):
+            question = ""  # Reset the question input
+            st.text_input("Ask a question about the medical report:", value=question, key="question_input")
+        
+        if question:
+            # Get the answer to the question
+            answer = get_answer(combined_text, question)
+            st.subheader("Answer")
+            st.write(answer)
+        else:
+            st.write("Please enter a question to get an answer.")
+
+if __name__ == '__main__':
+    main()
+
           
