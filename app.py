@@ -198,7 +198,8 @@ def save_summary(summary):
 def main():
 
     st.markdown("<h1 style='text-align: center;'>Mental Health Chatbot</h1>", unsafe_allow_html=True)
-
+    intro_message = "I am Ai heath chatBot train to solve issue releated to heath"
+    speak(intro_message)
 
     # Streamlit app
     if 'record' not in st.session_state:
