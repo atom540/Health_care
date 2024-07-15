@@ -91,6 +91,29 @@ def play_audio(file_path):
     st.audio(audio_bytes, format='audio/mp3')
 
 
+def speak(text):
+        """Speaks the provided text using the initialized engine."""
+
+        engine = pyttsx3.init()
+        voices = engine.getProperty("voices")
+        engine.setProperty("voice", voices[0].id)
+        try:
+            engine.say(text)
+            engine.runAndWait()
+        except RuntimeError as e:
+            if "run loop already started" in str(e):
+            # Handle potential engine restart if needed
+                    print("Engine restart required due to loop error.")
+                    engine.stop()
+                    engine.shutdown()
+                    engine = pyttsx3.init()
+                    voices = engine.getProperty("voices")
+                    engine.setProperty("voice", voices[0].id)
+                    speak(text)  # Retry speaking the text
+            else:
+                    raise e  # Raise other RuntimeError exceptions    
+
+
 
 def generate_summary(conversation_history):
     summary_prompt = "Please summarize the following conversation history:\n\n"
@@ -176,27 +199,9 @@ def save_summary(summary):
 def main():
 
         
-    def speak(text):
-        """Speaks the provided text using the initialized engine."""
-
-        engine = pyttsx3.init()
-        voices = engine.getProperty("voices")
-        engine.setProperty("voice", voices[0].id)
-        try:
-            engine.say(text)
-            engine.runAndWait()
-        except RuntimeError as e:
-            if "run loop already started" in str(e):
-            # Handle potential engine restart if needed
-                    print("Engine restart required due to loop error.")
-                    engine.stop()
-                    engine.shutdown()
-                    engine = pyttsx3.init()
-                    voices = engine.getProperty("voices")
-                    engine.setProperty("voice", voices[0].id)
-                    speak(text)  # Retry speaking the text
-            else:
-                    raise e  # Raise other RuntimeError exceptions
+    engine = pyttsx3.init()
+    voices = engine.getProperty("voices")
+    engine.setProperty("voice", voices[0].id)
 
 
     st.markdown("<h1 style='text-align: center;'>Mental Health Chatbot</h1>", unsafe_allow_html=True)
