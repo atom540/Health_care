@@ -16,3 +16,4 @@ pydub
 librosa
 streamlit_mic_recorder
 langchain-community
+comtypes
