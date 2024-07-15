@@ -37,11 +37,7 @@ def convert_bytes_to_array(audio_bytes):
     return audio
 
 
-# Initialize session state variables
-if "conversation_history" not in st.session_state:
-    st.session_state.conversation_history = []
-if "audio_counter" not in st.session_state:
-    st.session_state.audio_counter = 0
+
 
 def generate_response(user_input):
 
@@ -216,6 +212,11 @@ def main():
 
     if 'session_start' not in st.session_state:
         st.session_state.session_start = True
+    # Initialize session state variables
+    if "conversation_history" not in st.session_state:
+        st.session_state.conversation_history = []  
+    if "audio_counter" not in st.session_state:
+        st.session_state.audio_counter = 0    
 
 
     intro_message = "Remember to tap spacebar before you say any voice commands. To upload a file say UPLOAD, to start say START, to translate to a different language say TRANSLATE, to summarize say SUMMARISE, to ask questions say QUESTION, to quiz yourself say QUIZ, to change the playback speed say FAST, MEDIUM, or SLOW. "
@@ -335,7 +336,7 @@ def main():
                 speak(response)
                 st.write(response)
 
-            if st.session_state.conversation_history: 
+            if "conversation_history" in st.session_state and st.session_state.conversation_history:
 
                 if st.button("End Conversation"):
                     st.session_state.session_end = True
