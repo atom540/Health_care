@@ -179,7 +179,7 @@ def main():
     def speak(text):
         """Speaks the provided text using the initialized engine."""
 
-        engine = pyttsx3.init()
+        engine = pyttsx3.init(driverName='sapi5')  # Specify the driver name explicitly
         voices = engine.getProperty("voices")
         engine.setProperty("voice", voices[0].id)
         try:
