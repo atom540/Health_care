@@ -92,26 +92,26 @@ def play_audio(file_path):
 
 
 def speak(text):
-        """Speaks the provided text using the initialized engine."""
+    """Speaks the provided text using the initialized engine with sapi5 driver."""
 
-        engine = pyttsx3.init()
+    try:
+        engine = pyttsx3.init(driverName='sapi5')  # Specify the driver name explicitly
         voices = engine.getProperty("voices")
         engine.setProperty("voice", voices[0].id)
-        try:
-            engine.say(text)
-            engine.runAndWait()
-        except RuntimeError as e:
-            if "run loop already started" in str(e):
+        engine.say(text)
+        engine.runAndWait()
+    except RuntimeError as e:
+        if "run loop already started" in str(e):
             # Handle potential engine restart if needed
-                    print("Engine restart required due to loop error.")
-                    engine.stop()
-                    engine.shutdown()
-                    engine = pyttsx3.init()
-                    voices = engine.getProperty("voices")
-                    engine.setProperty("voice", voices[0].id)
-                    speak(text)  # Retry speaking the text
-            else:
-                    raise e  # Raise other RuntimeError exceptions    
+            print("Engine restart required due to loop error.")
+            engine.stop()
+            engine.shutdown()
+            engine = pyttsx3.init(driverName='sapi5')
+            voices = engine.getProperty("voices")
+            engine.setProperty("voice", voices[0].id)
+            speak(text)  # Retry speaking the text
+        else:
+            raise e  # Raise other RuntimeError exceptions  
 
 
 
