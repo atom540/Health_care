@@ -198,11 +198,6 @@ def save_summary(summary):
 
 def main():
 
-        
-    engine = pyttsx3.init()
-    voices = engine.getProperty("voices")
-    engine.setProperty("voice", voices[0].id)
-
 
     st.markdown("<h1 style='text-align: center;'>Mental Health Chatbot</h1>", unsafe_allow_html=True)
     # intro_message = "I am Ai heath chatBot train to solve issue releated to heath"
